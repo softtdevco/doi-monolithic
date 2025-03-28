@@ -13,7 +13,7 @@ const syncUserAccount = async ({connection , cred = {}}) =>{
             )
 
             if(syncUser) return {ok:true , data:{type:"syncSuccessful" , msg:"User account synced"}};
-            else return {ok:true , data:{type:"syncFailed" , msg:"Could not find account with specified ID"}};
+            else return {ok:false , data:{type:"syncFailed" , msg:"Could not find account with specified ID"}};
         }else
         {
             if(userExists.email === cred.email)
@@ -81,7 +81,7 @@ const userRegistration = async ({connection , initID , cred}) =>{
             await userSaveObject.save();
 
             return {ok:true , data:{type:"success" , msg:userID}}
-        }else return {ok:true , data:{type:"registrationFailed" , msg:"Device ID already exist"}}
+        }else return {ok:false , data:{type:"registrationFailed" , msg:"Device ID already exist"}}
     }catch(err)
     {
         return {ok:false , data:{type:"serverError" , msg:err.message}};
@@ -154,7 +154,7 @@ const updateCountry = async({connection , cred}) =>{
     
                 if(updateCountry_) return {ok:true , data:{type:"countryUpdateSuccessful" , msg:"Username updated successfully"}};
                 else return {ok:false , data:{type:"countryUpdateFailed" , msg:`Failed to update user country, error with updating property using connection.findOneAndUpdate`}};
-            }else return {ok:true , data:{type:"countryUpdateFailed" , msg:`country value is the same as previous value`}};
+            }else return {ok:false , data:{type:"countryUpdateFailed" , msg:`country value is the same as previous value`}};
             
         }else return {ok:false , data:{type:"countryUpdateFailed" , msg:"User does not EXIST"}};
     }
