@@ -1,0 +1,33 @@
+{
+  "regCred": [
+    "deviceID",
+    "username",
+    "country",
+    "avatar"
+  ],
+  "email_syncCred": [
+    "email",
+    "password",
+    "userID"
+  ],
+  "loginCred": [
+    "email",
+    "password",
+    "deviceID"
+  ],
+  "loginDeviceIDCred": [
+    "deviceID"
+  ],
+  "addUsernameCred": [
+    "username",
+    "userID"
+  ],
+  "updateCountryCred": [
+    "userID",
+    "country"
+  ],
+  "updateAvatarCred": [
+    "userID",
+    "avatar"
+  ]
+}

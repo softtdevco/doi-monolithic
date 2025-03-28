@@ -1,0 +1,32 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>API TEST</title>
+    </head>
+    <body>
+        testing DOI API
+    </body>
+    <script>
+        const testBaseApi = () =>{
+            fetch("https://doi-apis.fly.dev/user/update/avatar", {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        // username:"danielManny",
+                        // deviceID:"#1234yfgg",
+                        // country:"united kingdom",
+                        avatar:"kelly",
+                        // email:"batman@gmail.com",
+                        // password:"user1234",
+                        userID:"078ebc32-8425-41e3-9529-73d7b27c1bba"
+                }),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+        }   
+
+        testBaseApi();
+    </script>
+</html>
