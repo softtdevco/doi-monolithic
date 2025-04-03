@@ -1,0 +1,93 @@
+const newGameSession = ({connection,mongoose}) =>{
+    const schema = mongoose.Schema({
+        gameID:{
+            type:String,
+            required:true
+        },
+        hasStart:{
+            type:Boolean,
+            required:true
+        },
+        isEnd:{
+            type:Boolean,
+            required:true
+        },
+        hostID:{
+            type:String,
+            required:true
+        },
+        invitableCode:{
+            type:String,
+            required:true
+        },
+        gameMode:{
+            type:String,
+            required:true
+        },
+        clockTimer:{
+            type:Object,
+            required:false
+        },
+        playersID:{
+            type:Object,
+            required:false
+        },
+        secretCodes:{
+            type:Object,
+            required:false
+        },
+        gameRecord:{
+            type:Object,
+            required:false
+        },
+        deadPoints:{
+            type:Object,
+            required:false
+        },
+        gameCalls:{
+            type:Object,
+            required:false
+        },
+        playerAppInfo:{
+            type:Object,
+            required:false
+        },
+        connectionTrack:{
+            type:Number,
+            required:false
+        },
+        tournamentBase:{
+            type:Boolean,
+            required:true
+        },
+        tournamentInfo:{
+            type:Object,
+            required:false
+        },
+        jwtGameAuth:{
+            type:String,
+            required:true
+        },
+        playersCount:{
+            type:Number,
+            required:true
+        },
+        gameType:{
+            type:String,
+            required:true
+        },
+        guessDigitCount:{
+            type:Number,
+            required:true
+        },
+        serverSecretCode:{
+            type:Object,
+            required:false
+        }
+        
+    })
+
+    return connection.model('GameSessions',schema)
+}
+
+module.exports = newGameSession

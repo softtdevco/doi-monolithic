@@ -1,0 +1,106 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>API TEST</title>
+    </head>
+    <body>
+        testing DOI API
+    </body>
+    <div>
+        <div>
+            <input type="text" class="secretCode" placeholder="Enter secretCode">
+            <button class="sendCode">sendCode</button>
+        </div>
+        <input placeholder="Enter Guess" type="text" class="guessInput">
+        <button class="sendGuess">guess</button>
+    </div>
+    <script>
+        const testBaseApi = async ({endpoint , jwtToken , secretCode = "" , guess = "" , clockTimer = {min:5,sec:30}}) =>{//https://doi-apis.fly.dev/
+            await fetch(`https://doi-apis.fly.dev/${endpoint}`, {
+                    method: "POST",//#1234yfgg
+                    body: JSON.stringify({
+                        // username:"gamer2",
+                        // deviceID:"manny1234",
+                        // country:"Nigeria",
+                        // avatar:"bob",
+                        // email:"newEmail@gmail.com",
+                        // password:"user1234",
+                        gameDuration:{minute:"5" , second:"0"},
+                        guessDigitCount:4,
+                        playersCount:2,
+                        gameType:"casual",
+                        // userID:"078ebc32-8425-41e3-9529-73d7b27c1bba",
+                        gameMode:"1v1",
+                        inviteCode:"094c6992e5",
+                        secretCode:secretCode,
+                        gameID:"094c6992-e569-4754-a3d8-407551d3f1ba",
+                        // anonymous:true,
+                        jwtToken:jwtToken
+
+
+                }),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+        }   
+
+        // fetch("http://localhost:6070/user/multiplayer/authInviteCode")
+        // .then(response =>response.json())
+        // .then(data =>{
+        //     console.log(data)
+        // })
+
+        // player1 - "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkIjoiNWVkOWNiZDQtODFkYi00ZjQwLWFhOWEtMjM1ZDljYmI5ODViIiwiaWF0IjoxNzQzNjU2NDkzLCJleHAiOjE3NDM3NDI4OTN9.VT2i1G_KMlRD1AhAlHAYJZp0GzA6KQewl6psVVZJdik"
+
+        // player2 - "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkIjoiMWFlZGU4ZjgtYjBjZC00YmZmLTgxZjktODRkZTZmOTg5NDdlIiwiaWF0IjoxNzQzNjU3MzI1LCJleHAiOjE3NDM3NDM3MjV9.R8jiogoJycSrd4W-XSn4MCQdY-rjTT-T7651HwIMLAo"
+
+        const websocketConnection = async () =>{
+            const ws = new WebSocket("https://doi-apis.fly.dev/");
+
+            ws.addEventListener("open" , () =>{
+                ws.send(JSON.stringify({
+                    type:"multiplayer",
+                    post:"re_connect",
+                    body:{
+                        jwtToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkIjoiMWFlZGU4ZjgtYjBjZC00YmZmLTgxZjktODRkZTZmOTg5NDdlIiwiaWF0IjoxNzQzNjU3MzI1LCJleHAiOjE3NDM3NDM3MjV9.R8jiogoJycSrd4W-XSn4MCQdY-rjTT-T7651HwIMLAo",
+                        gameID:"094c6992-e569-4754-a3d8-407551d3f1ba"
+                    }
+                }))
+
+                ws.addEventListener("message" , ({data}) =>{
+                    console.log(JSON.parse(data))
+                })
+
+                document.querySelector(".sendGuess").addEventListener("click" , e =>{
+                    ws.send(JSON.stringify({
+                        type:"multiplayer",
+                        post:"playerGuess",
+                        body:{
+                            jwtToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkIjoiMWFlZGU4ZjgtYjBjZC00YmZmLTgxZjktODRkZTZmOTg5NDdlIiwiaWF0IjoxNzQzNjU3MzI1LCJleHAiOjE3NDM3NDM3MjV9.R8jiogoJycSrd4W-XSn4MCQdY-rjTT-T7651HwIMLAo",
+                            gameID:"094c6992-e569-4754-a3d8-407551d3f1ba",
+                            guess:document.querySelector(".guessInput").value,
+                            clockTimer:{min:5 , sec:10},
+                            gameMode:"1v1"
+                        }
+                    }))
+                })
+            })
+        }
+
+        document.querySelector(".sendCode").addEventListener("click" , e =>{
+            testBaseApi({endpoint:"player/multiplayer/updateSecretCode" , jwtToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkIjoiMWFlZGU4ZjgtYjBjZC00YmZmLTgxZjktODRkZTZmOTg5NDdlIiwiaWF0IjoxNzQzNjU3MzI1LCJleHAiOjE3NDM3NDM3MjV9.R8jiogoJycSrd4W-XSn4MCQdY-rjTT-T7651HwIMLAo" , secretCode:document.querySelector(".secretCode").value});
+        })
+
+        async function run()
+        {
+            await testBaseApi({endpoint:"player/multiplayer/authInvite" , jwtToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkIjoiMWFlZGU4ZjgtYjBjZC00YmZmLTgxZjktODRkZTZmOTg5NDdlIiwiaWF0IjoxNzQzNjU3MzI1LCJleHAiOjE3NDM3NDM3MjV9.R8jiogoJycSrd4W-XSn4MCQdY-rjTT-T7651HwIMLAo"});
+
+            websocketConnection();
+        }
+
+        run()
+    </script>
+</html>
