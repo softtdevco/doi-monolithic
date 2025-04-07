@@ -1,0 +1,92 @@
+{
+  "regCred": [
+    "deviceID",
+    "username",
+    "country",
+    "avatar"
+  ],
+  "email_syncCred": [
+    "email",
+    "password",
+    "jwtToken"
+  ],
+  "loginCred": [
+    "email",
+    "password",
+    "deviceID"
+  ],
+  "loginDeviceIDCred": [
+    "deviceID"
+  ],
+  "addUsernameCred": [
+    "username",
+    "jwtToken"
+  ],
+  "updateCountryCred": [
+    "jwtToken",
+    "country"
+  ],
+  "updateAvatarCred": [
+    "jwtToken",
+    "avatar"
+  ],
+  "createGameCred": [
+    "jwtToken",
+    "gameDuration",
+    "playersCount",
+    "gameType",
+    "guessDigitCount",
+    "gameMode"
+  ],
+  "authInviteCodeCred": [
+    "jwtToken",
+    "inviteCode"
+  ],
+  "updateSecretCodeCred": [
+    "jwtToken",
+    "gameID",
+    "secretCode"
+  ],
+  "sendNupdateConnectionCred": [
+    "jwtToken",
+    "gameID"
+  ],
+  "playerGuessCred": [
+    "jwtToken",
+    "gameID",
+    "guess",
+    "clockTimer",
+    "gameMode"
+  ],
+  "playerTimeOutCred": [
+    "jwtToken",
+    "gameID"
+  ],
+  "createTournamentCred": [
+    "jwtToken",
+    "name",
+    "type",
+    "entrySettings",
+    "startDate_time",
+    "pricePool",
+    "matchTimeLimit",
+    "allowSpectators",
+    "autoStart",
+    "pricePoolType",
+    "playersCount"
+  ],
+  "joinTournamentCred": [
+    "jwtToken",
+    "tID"
+  ],
+  "deleteTournamentCred": [
+    "jwtToken",
+    "tID"
+  ],
+  "leaderBoardCred":[
+    "searchObj"
+  ],
+  "playerStatsCred":[
+    "playerID"
+  ]
+}

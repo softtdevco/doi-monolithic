@@ -1,0 +1,81 @@
+const newTournamentSession = ({connection,mongoose}) =>{
+    const schema = mongoose.Schema({
+        tID:{
+            type:String,
+            required:true
+        },
+        hostID:{
+            type:String,
+            required:true
+        },
+        name:{
+            type:String,
+            required:true
+        },
+        pairingAlgorithm:{
+            type:String,
+            required:true
+        },
+        privacy:{
+            type:String,
+            required:true
+        },
+        currentStageNum:{
+            type:Number,
+            required:true
+        },
+        regAlive:{
+            type:Boolean,
+            required:true
+        },
+        tournamentAlive:{
+            type:Boolean,
+            required:true
+        },
+        playersCount:{
+            type:Number,
+            required:true
+        },
+        universalPlayers:{
+            type:Array,
+            required:true
+        },
+        gameObject:{
+            type:Object,
+            required:true
+        },
+        entrySettings:{
+            type:Object,
+            required:true
+        },
+        startDate:{
+            type:String,
+            required:true
+        },
+        pricePool:{
+            type:Object,
+            required:true
+        },
+        allowSpectators:{
+            type:Boolean,
+            required:true
+        },
+        autoStart:{
+            type:Boolean,
+            required:true
+        },
+        pricePoolType:{
+            type:Boolean,
+            required:true
+        },
+        optionalGamesCustomisation:{
+            type:Object,
+            required:false
+        }
+        
+    })
+
+    return connection.model('tournamentSessions',schema)
+}
+
+module.exports = newTournamentSession
